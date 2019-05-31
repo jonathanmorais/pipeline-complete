@@ -8,8 +8,7 @@ VERSION = (env.BRANCH_NAME != 'master') ? "${env.BRANCH_NAME}-${MAJOR_VERSION}.$
 node ('build') {
   try {
     stage "Install packages"
-      checkout scm
-    stage "Build Images"  
+      checkout scm 
       def run_image = docker.build("${env.BUILD_FRONT}", "--network=host")
       
       def run_image = docker.build("${env.BUILD_BACK}", "--network=host")
