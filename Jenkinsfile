@@ -10,9 +10,9 @@ node ('build') {
     stage "Install packages"
       checkout scm
     stage "Build Images"  
-      def run_image = docker.build("${env.BUILD_FRONT}" "--network=host")
+      def run_image = docker.build("${env.BUILD_FRONT}", "--network=host")
       
-      def run_image = docker.build("${env.BUILD_BACK}" "--network=host")
+      def run_image = docker.build("${env.BUILD_BACK}", "--network=host")
     // stage "Push"
     //   run_image.push()
     //   sh "docker rmi '${fullImageName(IMAGE_NAME)}'"
