@@ -8,7 +8,7 @@ node ('build') {
       checkout scm
       def run_image = docker.build("${fullImageName(IMAGE_NAME)}", "-f frontend/Dockerfile .  --network=host")
       
-      def run_image = docker.build("${fullImageName(IMAGE_NAME)}", "-f backend/Dockerfile .  --network=host")
+      //def run_image = docker.build("${fullImageName(IMAGE_NAME)}", "-f backend/Dockerfile .  --network=host")
     // stage "Push"
     //   run_image.push()
     //   sh "docker rmi '${fullImageName(IMAGE_NAME)}'"
