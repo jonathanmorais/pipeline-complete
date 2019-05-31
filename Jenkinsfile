@@ -1,14 +1,18 @@
 MAJOR_VERSION="1.0"
 IMAGE_NAME="python-frontend"
+BUILD_FRONT = frontend/Dockerfile
+BUILD_BACK = backend/Dockerfile
+
 VERSION = (env.BRANCH_NAME != 'master') ? "${env.BRANCH_NAME}-${MAJOR_VERSION}.${env.BUILD_ID}" : "${MAJOR_VERSION}.${env.BUILD_ID}"
 
 node ('build') {
   try {
     stage "Install packages"
       checkout scm
-      def run_image = docker.build("${fullImageName(IMAGE_NAME)}", "-f frontend/Dockerfile .  --network=host")
+    stage "Build Images"  
+      def run_image = docker.build("${env.BUILD_FRONT}" "--network=host")
       
-      //def run_image = docker.build("${fullImageName(IMAGE_NAME)}", "-f backend/Dockerfile .  --network=host")
+      def run_image = docker.build("${env.BUILD_BACK}" "--network=host")
     // stage "Push"
     //   run_image.push()
     //   sh "docker rmi '${fullImageName(IMAGE_NAME)}'"
