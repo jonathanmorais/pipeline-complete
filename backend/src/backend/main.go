@@ -123,11 +123,11 @@ func createUser(w http.ResponseWriter, r *http.Request) {
 	log.Info(r)
 	log.Info("Creating user")
 	b, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
 	}
+	defer r.Body.Close()
 
 	// Unmarshal
 	var u User
